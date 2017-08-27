@@ -1,0 +1,4 @@
+[submodule "reactnd-project-readable-starter"]
+	path = reactnd-project-readable-starter
+	url = https://github.com/MujunZ/reactnd-project-readable-starter.git
+    ignore = dirty

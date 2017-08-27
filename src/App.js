@@ -6,10 +6,22 @@ import * as ReadableAPI from './utils/readableAPI.js'
 class App extends Component {
   componentDidMount() {
     ReadableAPI.getAllCategories().then((categories) => {
-      console.log(categories);
+      console.log('getAllCategories',categories);
     })
-    ReadableAPI.getPost('react').then((post) => {
-      console.log(post);
+    ReadableAPI.getPostsOfCategory('react').then((post) => {
+      console.log('getPostsOfCategory',post);
+    })
+    ReadableAPI.getAllPosts().then((posts) => {
+      console.log('getAllPosts',posts);
+    })
+    ReadableAPI.getPostById('8xf0y6ziyjabvozdd253nd').then((post) => {
+      console.log('getPostById',post);
+    })
+    ReadableAPI.getCmtsOfPost('8xf0y6ziyjabvozdd253nd').then((cmt) => {
+      console.log('getCmtsOfPost',cmt);
+    })
+    ReadableAPI.getCmtsById('894tuq4ut84ut8v4t8wun89g').then((cmt) => {
+      console.log('getCmtsById',cmt);
     })
   }
   render() {
