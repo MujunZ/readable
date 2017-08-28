@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import * as ReadableAPI from './utils/readableAPI.js'
+import '../App.css';
+import * as ReadableAPI from '../utils/readableAPI';
+import { connect } from 'react-redux';
+import { addPost, editPost } from '../actions/';
 
 class App extends Component {
   componentDidMount() {
@@ -25,18 +26,24 @@ class App extends Component {
     })
   }
   render() {
+    console.log('Props', this.props)
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <div>Hello World!</div>
     );
   }
 }
 
-export default App;
+function mapStateToProps ({ posts }) {
+  return {
+    posts
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    addPost: (data) => dispatch(addPost(data)),
+    editPost: (data) => dispatch(editPost(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
