@@ -5,9 +5,14 @@ import { connect } from 'react-redux';
 import { addPost, editPost } from '../actions/';
 
 class App extends Component {
+  state = {
+    categories: [],
+    posts: [],
+  }
   componentDidMount() {
     ReadableAPI.getAllCategories().then((categories) => {
       console.log('getAllCategories',categories);
+      this.setState({ categories });
     })
     ReadableAPI.getPostsOfCategory('react').then((post) => {
       console.log('getPostsOfCategory',post);
@@ -28,7 +33,14 @@ class App extends Component {
   render() {
     console.log('Props', this.props)
     return (
-      <div>Hello World!</div>
+      <main className='container'>
+        {this.state.categories.map(({ name }) => (
+            <section
+              key={name}
+              className='category__container'
+              >{name}</section>
+          ))}
+      </main>
     );
   }
 }
