@@ -1,5 +1,6 @@
 import {
 	INIT_CATEGORIES,
+	GET_ALL_POSTS,
 	ADD_POST,
 	EDIT_POST,
 	VOTE_POST,
@@ -15,13 +16,18 @@ import { combineReducers } from 'redux'
 // 	comments: []
 // }
 
-function category (state = {}, action) {
-	const { categories } = action
+function initState (state = {}, action) {
+	const { categories, posts } = action
 	switch (action.type) {
 		case INIT_CATEGORIES :
 			return {
 				...state,
 				categories
+			}
+		case GET_ALL_POSTS :
+			return {
+				...state,
+				posts
 			}
 		default :
 			return state
@@ -57,6 +63,6 @@ function post (state = {}, action) {
 }
 
 export default combineReducers({
-	category,
+	initState,
 	post
 })

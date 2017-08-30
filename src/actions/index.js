@@ -1,4 +1,5 @@
 export const INIT_CATEGORIES = "INIT_CATEGORIES";
+export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const ADD_POST = "ADD_POST";
 export const EDIT_POST = "EDIT_POST";
 export const DELETE_POST = "DELETE_POST";
@@ -12,6 +13,13 @@ export function initCategories ({ categories }) {
 	return {
 		type: INIT_CATEGORIES,
 		categories
+	}
+}
+
+export function getAllPosts ({ posts }) {
+	return {
+		type: GET_ALL_POSTS,
+		posts
 	}
 }
 

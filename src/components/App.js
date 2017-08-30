@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
-import { initCategories, addPost, editPost } from '../actions/';
+import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
 
 class App extends Component {
   state = {
@@ -11,17 +11,15 @@ class App extends Component {
   }
   componentDidMount() {
     ReadableAPI.getAllCategories().then((categories) => {
-      console.log('getAllCategories',categories);
       this.props.initCategories({categories});
-      this.setState({ categories });
     })
     // ReadableAPI.getPostsOfCategory('react').then((post) => {
     //   console.log('getPostsOfCategory',post);
     // })
-    // ReadableAPI.getAllPosts().then((posts) => {
-    //   console.log('getAllPosts',posts);
-    //   this.setState({ posts });
-    // })
+    ReadableAPI.getAllPosts().then((posts) => {
+      console.log('getAllPosts',posts);
+      this.props.getAllPosts({posts})
+    })
     // ReadableAPI.getPostById('8xf0y6ziyjabvozdd253nd').then((post) => {
     //   console.log('getPostById',post);
     // })
@@ -41,7 +39,7 @@ class App extends Component {
   // }
   render() {
     console.log('Props', this.props);
-    const { categories=[] } = this.props.category;
+    const { categories=[] } = this.props.initState;
     return (
         <main className='container'>
           {categories.map(({ name }) => (
@@ -57,9 +55,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ category, post }) {
+function mapStateToProps ({ initState, post }) {
   return {
-    category,
+    initState,
     post
   }
 }
@@ -67,6 +65,7 @@ function mapStateToProps ({ category, post }) {
 function mapDispatchToProps (dispatch) {
   return {
     initCategories: (data) => dispatch(initCategories(data)),
+    getAllPosts: (data) => dispatch(getAllPosts(data)),
     addPost: (data) => dispatch(addPost(data)),
     editPost: (data) => dispatch(editPost(data))
   }
