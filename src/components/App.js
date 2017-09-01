@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PostList from './PostList';
 import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
@@ -17,7 +18,6 @@ class App extends Component {
     //   console.log('getPostsOfCategory',post);
     // })
     ReadableAPI.getAllPosts().then((posts) => {
-      console.log('getAllPosts',posts);
       this.props.getAllPosts({posts})
     })
     // ReadableAPI.getPostById('8xf0y6ziyjabvozdd253nd').then((post) => {
@@ -48,9 +48,9 @@ class App extends Component {
                 className='category__container'
                 >
                 <h1>{name}</h1>
+                <PostList name={name}/>
               </section>
-            ))}
-        }
+          ))}
         </main>);
   }
 }
