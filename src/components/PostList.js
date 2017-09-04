@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
+import Post from './Post.js';
+import { Route } from 'react-router-dom';
 
-class Post extends Component {
+class PostList extends Component {
 	render() {
-		console.log('Post Props', this.props);
+		console.log('PostList Props', this.props);
 		const { posts=[] } = this.props.initState;
 		const categoryName = this.props.name;
 		return(
@@ -13,12 +14,14 @@ class Post extends Component {
 	          .filter(({ category, deleted }) => category === categoryName && deleted === false )
 	          .sort((a, b) => b.voteScore - a.voteScore )
 	          .map(({ id, timestamp, title, body, author, category, voteScore}) => (
-	              <div key={id} className={`post__container`}>
+	          	<div key={id}>
+	              <div className={`post__container`}>
 	                <div>{voteScore}</div>
-	                <div>{title}</div>
+	                <a href={`#post`}>{title}</a>
 	                <div>{author}</div>
 	                <div>{timestamp}</div>
 	              </div>
+	          	</div>
 	            ))}
             </div>
 		)
@@ -32,11 +35,4 @@ function mapStateToProps ({ initState, post }) {
   }
 }
 
-function mapDispatchToProps (dispatch) {
-  return {
-    addPost: (data) => dispatch(addPost(data)),
-    editPost: (data) => dispatch(editPost(data))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Post);
+export default connect(mapStateToProps)(PostList);

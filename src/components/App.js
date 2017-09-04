@@ -4,6 +4,8 @@ import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
 import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
+import { Route } from 'react-router-dom';
+import Post from './Post.js';
 
 class App extends Component {
   state = {
@@ -39,19 +41,31 @@ class App extends Component {
   // }
   render() {
     console.log('Props', this.props);
-    const { categories=[] } = this.props.initState;
+    const { categories=[], posts=[] } = this.props.initState;
     return (
-        <main className='container'>
-          {categories.map(({ name }) => (
-              <section
-                key={name}
-                className='category__container'
-                >
-                <h1>{name}</h1>
-                <PostList name={name}/>
-              </section>
+      <div>
+        <Route exact path='/' render={() => (
+          <main className='container'>
+            {categories.map(({ name }) => (
+                <section
+                  key={name}
+                  className='category__container'
+                  >
+                  <h1>{name}</h1>
+                  <PostList name={name}/>
+                </section>
+            ))}
+          </main>
+        )}/>
+        <div>
+          {posts.map(({ id }) => (
+            <Route key={id} path={`/post${id}`} render={()=>(
+              <Post id={id} />
+            )}/>
           ))}
-        </main>);
+        </div>
+      </div>
+    );
   }
 }
 
