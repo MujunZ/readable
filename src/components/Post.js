@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
 import * as ReadableAPI from '../utils/readableAPI';
+import { Link } from 'react-router-dom';
 
 class Post extends Component {
 	render() {
@@ -17,6 +18,7 @@ class Post extends Component {
 					<div>{voteScore} liked</div>
 				</div>
 				<div>{body}</div>
+				<Link to="/">back</Link>
 			</main>
 		)
 	}

@@ -4,7 +4,7 @@ import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
 import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
-import { Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Post from './Post.js';
 
 class App extends Component {
@@ -43,6 +43,7 @@ class App extends Component {
     console.log('Props', this.props);
     const { categories=[], posts=[] } = this.props.initState;
     return (
+      <BrowserRouter>
       <div>
         <Route exact path='/' render={() => (
           <main className='container'>
@@ -59,12 +60,13 @@ class App extends Component {
         )}/>
         <div>
           {posts.map(({ id }) => (
-            <Route key={id} path={`/post${id}`} render={()=>(
+            <Route key={id} path={`/post/${id}`} render={()=>(
               <Post id={id} />
             )}/>
           ))}
         </div>
       </div>
+      </BrowserRouter>
     );
   }
 }

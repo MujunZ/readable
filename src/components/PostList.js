@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from './Post.js';
-import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class PostList extends Component {
 	render() {
@@ -17,7 +17,7 @@ class PostList extends Component {
 	          	<div key={id}>
 	              <div className={`post__container`}>
 	                <div>{voteScore}</div>
-	                <a href={`#post`}>{title}</a>
+	                <Link to={`/post/${id}`}>{title}</Link>
 	                <div>{author}</div>
 	                <div>{timestamp}</div>
 	              </div>
