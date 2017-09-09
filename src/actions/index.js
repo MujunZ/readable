@@ -8,15 +8,16 @@ export const ADD_COMMENT = "ADD_COMMENT";
 export const EDIT_COMMENT = "EDIT_COMMENT";
 export const DELETE_COMMENT = "DELETE_COMMENT";
 export const VOTE_COMMENT = "VOTE_COMMENT";
+export const GET_CMTS_OF_POST = "GET_CMTS_OF_POST";
 
-export function initCategories ({ categories }) {
+export function initCategories (categories) {
 	return {
 		type: INIT_CATEGORIES,
 		categories
 	}
 }
 
-export function getAllPosts ({ posts }) {
+export function getAllPosts (posts) {
 	return {
 		type: GET_ALL_POSTS,
 		posts
@@ -59,5 +60,12 @@ export function votePost ({ id, upOrDownVote }) {
 		type: VOTE_POST,
 		id,
 		upOrDownVote
+	}
+}
+
+export function getCmtsOfPost (comments) {
+	return {
+		type: GET_CMTS_OF_POST,
+		comments
 	}
 }

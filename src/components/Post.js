@@ -1,42 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
-import * as ReadableAPI from '../utils/readableAPI';
+import { addPost, editPost, getAllPosts, getCmtsOfPost } from '../actions/';
 import { Link } from 'react-router-dom';
+import * as ReadableAPI from '../utils/readableAPI';
+import Comment from './Comment.js';
 
 class Post extends Component {
+	componentDidMount() {
+		ReadableAPI.getCmtsOfPost(this.props.id).then((cmt) => {
+			this.props.getCmtsOfPost(cmt);
+		})
+	}
 	render() {
-		console.log('Post Props', this.props.initState.posts);
+		console.log('Post Props', this.props);
 		const { id, author, timestamp, body, category, title, voteScore } = this.props.initState.posts.filter((post) => post.id === this.props.id)[0];
 		const postId = this.props.id;
 		return(
 			<main className={`post-${postId}`}>
+				<Link to="/">back</Link>
 				<h1>{title}</h1>
-				<div>
+				<div className="post-info card__head">
 					<div>by {author}</div>
 					<div>at {timestamp}</div>
 					<div>{voteScore} liked</div>
 				</div>
-				<div>{body}</div>
-				<Link to="/">back</Link>
+				<div className="post-body card__body">{body}</div>
+				<Comment />
 			</main>
 		)
 	}
 }
 
-function mapStateToProps ({ initState, post }) {
+function mapStateToProps ({ initState, post, comment }) {
   return {
     initState,
-    post
+    post,
+    comment
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    initCategories: (data) => dispatch(initCategories(data)),
-    getAllPosts: (data) => dispatch(getAllPosts(data)),
     addPost: (data) => dispatch(addPost(data)),
-    editPost: (data) => dispatch(editPost(data))
+    editPost: (data) => dispatch(editPost(data)),
+    getCmtsOfPost: (data) => dispatch(getCmtsOfPost(data))
   }
 }
 

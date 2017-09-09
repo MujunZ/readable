@@ -4,7 +4,7 @@ import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
 import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import Post from './Post.js';
 
 class App extends Component {
@@ -14,13 +14,13 @@ class App extends Component {
   }
   componentDidMount() {
     ReadableAPI.getAllCategories().then((categories) => {
-      this.props.initCategories({categories});
+      this.props.initCategories(categories);
     })
     // ReadableAPI.getPostsOfCategory('react').then((post) => {
     //   console.log('getPostsOfCategory',post);
     // })
     ReadableAPI.getAllPosts().then((posts) => {
-      this.props.getAllPosts({posts})
+      this.props.getAllPosts(posts)
     })
     // ReadableAPI.getPostById('8xf0y6ziyjabvozdd253nd').then((post) => {
     //   console.log('getPostById',post);

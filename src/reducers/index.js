@@ -4,9 +4,9 @@ import {
 	ADD_POST,
 	EDIT_POST,
 	VOTE_POST,
-	DELETE_POST
+	DELETE_POST,
+	GET_CMTS_OF_POST
 } from '../actions/'
-import * as ReadableAPI from '../utils/readableAPI';
 import { combineReducers } from 'redux'
 
 
@@ -30,12 +30,12 @@ function initState (state = {}, action) {
 				posts
 			}
 		default :
-			return state
+			return state;
 	}
 }
 
 function post (state = {}, action) {
-	const { id, timeStamp, title, body, author, category } = action
+	const { id, timeStamp, title, body, author, category } = action;
 
 	switch (action.type) {
 		case ADD_POST :
@@ -58,11 +58,26 @@ function post (state = {}, action) {
 				category
 			}
 		default :
-			return state
+			return state;
+	}
+}
+
+function comment (state = {}, action) {
+	const { comments, author, body, deleted, id, parentId, timestamp, voteScore } = action;
+
+	switch (action.type) {
+		case GET_CMTS_OF_POST :
+			return {
+				...state,
+				comments
+			}
+		default :
+			return state;
 	}
 }
 
 export default combineReducers({
 	initState,
-	post
+	post,
+	comment
 })

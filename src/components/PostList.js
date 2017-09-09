@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Post from './Post.js';
 import { Link } from 'react-router-dom';
 
 class PostList extends Component {
@@ -15,8 +14,8 @@ class PostList extends Component {
 	          .sort((a, b) => b.voteScore - a.voteScore )
 	          .map(({ id, timestamp, title, body, author, category, voteScore}) => (
 	          	<div key={id}>
-	              <div className={`post__container`}>
-	                <div>{voteScore}</div>
+	              <div className="card__head">
+	                <div>{voteScore} Liked</div>
 	                <Link to={`/post/${id}`}>{title}</Link>
 	                <div>{author}</div>
 	                <div>{timestamp}</div>
