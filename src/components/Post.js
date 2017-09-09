@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addPost, editPost, getAllPosts, getCmtsOfPost } from '../actions/';
+import { addPost, editPost, getCmtsOfPost } from '../actions/';
 import { Link } from 'react-router-dom';
 import * as ReadableAPI from '../utils/readableAPI';
 import Comment from './Comment.js';
@@ -13,7 +13,7 @@ class Post extends Component {
 	}
 	render() {
 		console.log('Post Props', this.props);
-		const { id, author, timestamp, body, category, title, voteScore } = this.props.initState.posts.filter((post) => post.id === this.props.id)[0];
+		const { author, timestamp, body, title, voteScore } = this.props.initState.posts.filter((post) => post.id === this.props.id)[0];
 		const postId = this.props.id;
 		return(
 			<main className={`post-${postId}`}>
@@ -25,7 +25,7 @@ class Post extends Component {
 					<div>{voteScore} liked</div>
 				</div>
 				<div className="post-body card__body">{body}</div>
-				<Comment />
+				<Comment parentId={postId}/>
 			</main>
 		)
 	}

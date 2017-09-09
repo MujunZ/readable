@@ -69,3 +69,14 @@ export function getCmtsOfPost (comments) {
 		comments
 	}
 }
+
+export function addComment ({ id, timestamp, body, author, parentId }) {
+	return {
+		type: ADD_COMMENT,
+		id,
+		timestamp,
+		body,
+		author,
+		parentId
+	}
+}

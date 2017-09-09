@@ -5,9 +5,11 @@ import {
 	EDIT_POST,
 	VOTE_POST,
 	DELETE_POST,
-	GET_CMTS_OF_POST
+	GET_CMTS_OF_POST,
+	ADD_COMMENT
 } from '../actions/'
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
+import * as ReadableAPI from '../utils/readableAPI';
 
 
 // const initialPostState = {
@@ -71,6 +73,20 @@ function comment (state = {}, action) {
 				...state,
 				comments
 			}
+		case ADD_COMMENT :
+			const addCommentVal = {
+						id,
+						parentId,
+						body,
+						author,
+						timestamp,
+						voteScore: 0,
+						deleted: false,
+						parentDeleted: false
+					}
+			ReadableAPI.addComment(addCommentVal).then(e=>{console.log(e)});
+			state.comments.push(addCommentVal);
+			return state;
 		default :
 			return state;
 	}
