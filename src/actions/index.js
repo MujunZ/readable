@@ -80,3 +80,10 @@ export function addComment ({ id, timestamp, body, author, parentId }) {
 		parentId
 	}
 }
+
+export function deleteComment (id) {
+	return {
+		type: DELETE_COMMENT,
+		id
+	}
+}

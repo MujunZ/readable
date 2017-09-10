@@ -6,7 +6,8 @@ import {
 	VOTE_POST,
 	DELETE_POST,
 	GET_CMTS_OF_POST,
-	ADD_COMMENT
+	ADD_COMMENT,
+	DELETE_COMMENT
 } from '../actions/'
 import { combineReducers } from 'redux';
 import * as ReadableAPI from '../utils/readableAPI';
@@ -80,13 +81,25 @@ function comment (state = {}, action) {
 						body,
 						author,
 						timestamp,
-						voteScore: 0,
+						voteScore: 1,
 						deleted: false,
 						parentDeleted: false
 					}
-			ReadableAPI.addComment(addCommentVal).then(e=>{console.log(e)});
+			ReadableAPI.addComment(addCommentVal);
 			state.comments.push(addCommentVal);
 			return state;
+		case DELETE_COMMENT :
+			const newState = {
+				...state,
+				comments: state.comments.map((cmt) => {
+					if (cmt.id === id) {
+						cmt.deleted = true;
+					}
+					return cmt
+					})
+			}
+			ReadableAPI.deleteComment(id);
+			return newState;
 		default :
 			return state;
 	}

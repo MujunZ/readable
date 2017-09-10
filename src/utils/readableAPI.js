@@ -54,3 +54,8 @@ export const addComment = (cmt) =>
     },
     body: JSON.stringify(cmt)
   }).then(res => res.json())
+
+export const deleteComment = (cmtId) =>
+fetch(`${api}/comments/${cmtId}`, { method: 'DELETE', headers })
+  .then(res => res.json())
+  .then(data => data.comments)
