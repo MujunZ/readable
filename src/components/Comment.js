@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import serialize from 'form-serialize';
 import uniqid from 'uniqid';
-import { addComment, deleteComment } from '../actions/';
+import { addComment, deleteComment, voteComment } from '../actions/';
+import TiDelete from 'react-icons/lib/ti/delete';
+import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
+import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
+import * as ReadableAPI from '../utils/readableAPI';
 
 class Comment extends Component {
 	state = {
@@ -20,6 +24,14 @@ class Comment extends Component {
 		this.props.addComment(addCommentVal);
 		this.setState({comments: addCommentVal});
 		e.target.reset();
+	}
+	voteUp = (id, voteScore) => {
+		voteScore++;
+		this.props.voteComment({id, voteScore})
+	}
+	voteDown = (id, voteScore) => {
+		voteScore--;
+		this.props.voteComment({id, voteScore})
 	}
 	render () {
 	const { comments=[] } = this.props.comment;
@@ -52,10 +64,16 @@ class Comment extends Component {
 						return(
 							<div key={id}>
 								<div className="card__head">
-									<div>{voteScore} Liked</div>
+									<div className="vote-container">
+										<div>{voteScore} Liked</div>
+										<div>
+											<div onClick={()=>{this.voteUp(id, voteScore)}}><TiThumbsUp /></div>
+											<div onClick={()=>{this.voteDown(id, voteScore)}}><TiThumbsDown /></div>
+										</div>
+									</div>
 									<div>by {author}</div>
 									<div>at {time}</div>
-									<button onClick={()=>{this.props.deleteComment(id)}}>Delete</button>
+									<div onClick={()=>{this.props.deleteComment(id)}}><TiDelete /></div>
 								</div>
 								<div>{body}</div>
 							</div>
@@ -77,7 +95,8 @@ function mapStateToProps ({ comment }) {
 function mapDispatchToProps (dispatch) {
   return {
     addComment: (data) => dispatch(addComment(data)),
-    deleteComment: (data) => dispatch(deleteComment(data))
+    deleteComment: (data) => dispatch(deleteComment(data)),
+    voteComment: (data) => dispatch(voteComment(data))
   }
 }
 

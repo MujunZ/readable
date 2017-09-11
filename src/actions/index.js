@@ -87,3 +87,11 @@ export function deleteComment (id) {
 		id
 	}
 }
+
+export function voteComment ({ id, voteScore }) {
+	return {
+		type: VOTE_COMMENT,
+		id,
+		voteScore
+	}
+}

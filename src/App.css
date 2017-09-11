@@ -21,3 +21,7 @@
 	align-self: flex-end;
 	height: 2em;
 }
+
+.vote-container {
+	display: flex;
+}
