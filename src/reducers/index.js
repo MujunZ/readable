@@ -8,7 +8,8 @@ import {
 	GET_CMTS_OF_POST,
 	ADD_COMMENT,
 	DELETE_COMMENT,
-	VOTE_COMMENT
+	VOTE_COMMENT,
+	EDIT_COMMENT
 } from '../actions/'
 import { combineReducers } from 'redux';
 import * as ReadableAPI from '../utils/readableAPI';
@@ -115,6 +116,8 @@ function comment (state = {}, action) {
 				...state,
 				comments: newComments
 			};
+		case EDIT_COMMENT :
+			return state;
 		default :
 			return state;
 	}

@@ -6,7 +6,9 @@ import { addComment, deleteComment, voteComment } from '../actions/';
 import TiDelete from 'react-icons/lib/ti/delete';
 import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
 import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
+import TiEdit from 'react-icons/lib/ti/edit';
 import * as ReadableAPI from '../utils/readableAPI';
+import CommentForm from './CommentForm'
 
 class Comment extends Component {
 	state = {
@@ -40,19 +42,7 @@ class Comment extends Component {
 				<div className="card__head">
 					<h1>Comments</h1>
 				</div>
-				<div className="comment-form">
-					<form onSubmit={this.addComment}>
-						<div>
-							<label htmlFor="author">Nickname:</label>
-							<input type="text" name="author"/>
-						</div>
-						<div>
-							<label htmlFor="author">Comment:</label>
-							<input type="text" name="body"/>
-						</div>
-						<button>submit</button>
-					</form>
-				</div>
+				<CommentForm onAddComment={this.addComment}/>
 				<hr/>
 				<div>
 				{comments
@@ -73,7 +63,10 @@ class Comment extends Component {
 									</div>
 									<div>by {author}</div>
 									<div>at {time}</div>
-									<div onClick={()=>{this.props.deleteComment(id)}}><TiDelete /></div>
+									<div>
+										<div onClick={()=>{this.props.deleteComment(id)}}><TiDelete /></div>
+										<div><TiEdit /></div>
+									</div>
 								</div>
 								<div>{body}</div>
 							</div>

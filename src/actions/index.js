@@ -95,3 +95,14 @@ export function voteComment ({ id, voteScore }) {
 		voteScore
 	}
 }
+
+export function editComment ({ id, timestamp, body, author, parentId }) {
+	return {
+		type: EDIT_COMMENT,
+		id,
+		timestamp,
+		body,
+		author,
+		parentId
+	}
+}

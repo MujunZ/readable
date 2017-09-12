@@ -70,3 +70,13 @@ fetch(`${api}/comments/${cmtId}`, {
   body: JSON.stringify({ option })
 }).then(res => res.json())
 .then(data => data.comments)
+
+export const editComment = (cmt) =>
+  fetch(`${api}/comments/${cmt.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cmt)
+ }).then(res => res.json())
