@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as ReadableAPI from '../utils/readableAPI';
 
 class Comment extends Component {
 	state = {
 		nameError: false,
 		msgError: false
 	}
-	validateForm = e => {
+	validateAndSubmit = (e,id) => {
 		e.preventDefault();
 		if (e.target.elements["author"].value === "") {
 			this.setState({ nameError: true });
@@ -16,27 +17,35 @@ class Comment extends Component {
 			this.setState({ msgError: true });
 		}
 		if (!this.state.nameError && !this.state.msgError){
-			this.props.onAddComment(e);
+			this.props.onSubmitComment(e,this.props.id);
 		}
 	}
-	hideNameError = () => {
-		this.setState({ nameError: false });
+	hideNameError = e => {
+		if (e.target.value === "") {
+			this.setState({ nameError: true });
+		} else {
+			this.setState({ nameError: false });
+		}
 	}
-	hideMsgError = () => {
-		this.setState({ msgError: false });
+	hideMsgError = e => {
+		if (e.target.value === "") {
+			this.setState({ msgError: true });
+		} else {
+			this.setState({ msgError: false });
+		}
 	}
 	render () {
 		return(
 			<div className="comment-form">
-				<form onSubmit={e => this.validateForm(e)}>
+				<form onSubmit={(e) => {this.validateAndSubmit(e)}}>
 					<div>
 						<label htmlFor="author">Nickname:</label>
-						<input type="text" name="author" onChange={this.hideNameError}/>
+						<input type="text" name="author" onChange={e => this.hideNameError(e)} defaultValue={this.props.author}/>
 						{this.state.nameError && (<div className="error-warning">Please name yourself.</div>)}
 					</div>
 					<div>
 						<label htmlFor="author">Comment:</label>
-						<input type="text" name="body" onChange={this.hideMsgError}/>
+						<input type="text" name="body" onChange={e => this.hideMsgError(e)} defaultValue={this.props.body}/>
 						{this.state.msgError && (<div className="error-warning">Please say something.</div>)}
 					</div>
 					<button>submit</button>

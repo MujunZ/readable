@@ -117,6 +117,13 @@ function comment (state = {}, action) {
 				comments: newComments
 			};
 		case EDIT_COMMENT :
+			for (let cmt of state.comments) {
+				if (cmt.id === id) {
+					cmt.author = author;
+					cmt.body = body;
+					ReadableAPI.editComment(cmt);
+				}
+			}
 			return state;
 		default :
 			return state;

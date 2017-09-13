@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import serialize from 'form-serialize';
 import uniqid from 'uniqid';
-import { addComment, deleteComment, voteComment } from '../actions/';
+import { addComment, editComment, deleteComment, voteComment } from '../actions/';
 import TiDelete from 'react-icons/lib/ti/delete';
 import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
 import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
@@ -12,20 +12,32 @@ import CommentForm from './CommentForm'
 
 class Comment extends Component {
 	state = {
-		comments: this.props.comment,
+		showForm: {}
 	}
 	addComment = e => {
 		e.preventDefault();
 		let addCommentVal = serialize(e.target, { hash: true });
 		addCommentVal = {
 			...addCommentVal,
-			timestamp: Date(),
+			timestamp: Date.now(),
 			id: uniqid(),
 			parentId: this.props.parentId
 		}
 		this.props.addComment(addCommentVal);
-		this.setState({comments: addCommentVal});
+		this.setState({});
 		e.target.reset();
+	}
+	editComment = (e, id, sf) => {
+		e.preventDefault();
+		let addCommentVal = serialize(e.target, { hash: true });
+		addCommentVal = {
+			...addCommentVal,
+			timestamp: Date.now(),
+			id,
+			parentId: this.props.parentId
+		}
+		this.props.editComment(addCommentVal);
+		this.setState({});
 	}
 	voteUp = (id, voteScore) => {
 		voteScore++;
@@ -39,18 +51,18 @@ class Comment extends Component {
 	const { comments=[] } = this.props.comment;
 		return(
 			<section>
-				<div className="card__head">
+				<div className="card__head comment-form">
 					<h1>Comments</h1>
 				</div>
-				<CommentForm onAddComment={this.addComment}/>
+				<CommentForm onSubmitComment={this.addComment}/>
 				<hr/>
-				<div>
+				<div className="comment-list">
 				{comments
 					.filter(({ parentDeleted, deleted }) => parentDeleted === false && deleted === false)
 					.sort((a, b) => b.voteScore - a.voteScore )
 					.map(({ id, author, body, timestamp, voteScore }) => {
 						let time = new Date(timestamp);
-						time = time.toDateString();
+						time = time.toUTCString();
 						return(
 							<div key={id}>
 								<div className="card__head">
@@ -65,10 +77,11 @@ class Comment extends Component {
 									<div>at {time}</div>
 									<div>
 										<div onClick={()=>{this.props.deleteComment(id)}}><TiDelete /></div>
-										<div><TiEdit /></div>
+										<div onClick={() => {}}><TiEdit /></div>
 									</div>
 								</div>
 								<div>{body}</div>
+								<CommentForm onSubmitComment={(e,id) => this.editComment(e,id)} id={id} author={author} body={body}/>
 							</div>
 						)
 					})
@@ -88,6 +101,7 @@ function mapStateToProps ({ comment }) {
 function mapDispatchToProps (dispatch) {
   return {
     addComment: (data) => dispatch(addComment(data)),
+    editComment: (data) => dispatch(editComment(data)),
     deleteComment: (data) => dispatch(deleteComment(data)),
     voteComment: (data) => dispatch(voteComment(data))
   }
