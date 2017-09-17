@@ -27,7 +27,7 @@ class Comment extends Component {
 		this.setState({});
 		e.target.reset();
 	}
-	editComment = (e, id, sf) => {
+	editComment = (e, id) => {
 		e.preventDefault();
 		let addCommentVal = serialize(e.target, { hash: true });
 		addCommentVal = {
@@ -37,7 +37,11 @@ class Comment extends Component {
 			parentId: this.props.parentId
 		}
 		this.props.editComment(addCommentVal);
-		this.setState({});
+		this.setState({
+			showForm: {
+				[id]: false
+			}
+		});
 	}
 	voteUp = (id, voteScore) => {
 		voteScore++;
@@ -49,6 +53,7 @@ class Comment extends Component {
 	}
 	render () {
 	const { comments=[] } = this.props.comment;
+	let showForm = {};
 		return(
 			<section>
 				<div className="card__head comment-form">
@@ -63,6 +68,7 @@ class Comment extends Component {
 					.map(({ id, author, body, timestamp, voteScore }) => {
 						let time = new Date(timestamp);
 						time = time.toUTCString();
+						showForm[id] = false;
 						return(
 							<div key={id}>
 								<div className="card__head">
@@ -77,11 +83,14 @@ class Comment extends Component {
 									<div>at {time}</div>
 									<div>
 										<div onClick={()=>{this.props.deleteComment(id)}}><TiDelete /></div>
-										<div onClick={() => {}}><TiEdit /></div>
+										<div onClick={() => {
+											showForm[id] = true;
+											this.setState({ showForm });
+										}}><TiEdit /></div>
 									</div>
 								</div>
 								<div>{body}</div>
-								<CommentForm onSubmitComment={(e,id) => this.editComment(e,id)} id={id} author={author} body={body}/>
+								{ this.state.showForm[id] && (<CommentForm onSubmitComment={(e,id) => this.editComment(e,id)} id={id} author={author} body={body}/>)}
 							</div>
 						)
 					})
