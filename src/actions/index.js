@@ -46,12 +46,10 @@ export function editPost ({ timeStamp, title, body, category }) {
 	}
 }
 
-export function deletePost ({ id, deleted, parentDeleted }) {
+export function deletePost (id) {
 	return {
 		type: DELETE_POST,
-		id,
-		deleted,
-		parentDeleted
+		id
 	}
 }
 

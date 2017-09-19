@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import TiDelete from 'react-icons/lib/ti/delete';
+import { deletePost } from '../actions/';
 
 class PostList extends Component {
 	render() {
@@ -22,6 +24,7 @@ class PostList extends Component {
 		                <Link to={`/post/${id}`}>{title}</Link>
 		                <div>{author}</div>
 		                <div>{time}</div>
+		                <div onClick={()=>{this.props.deletePost(id)}}><TiDelete /></div>
 		              </div>
 		          	</div>
 	            )}
@@ -38,4 +41,10 @@ function mapStateToProps ({ initState, post }) {
   }
 }
 
-export default connect(mapStateToProps)(PostList);
+function mapDispatchToProps (dispatch) {
+  return {
+    deletePost: (data) => dispatch(deletePost(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostList);

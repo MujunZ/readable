@@ -14,13 +14,6 @@ import {
 import { combineReducers } from 'redux';
 import * as ReadableAPI from '../utils/readableAPI';
 
-
-// const initialPostState = {
-// 	categories: [],
-// 	posts: [],
-// 	comments: []
-// }
-
 function initState (state = {}, action) {
 	const { categories, posts } = action
 	switch (action.type) {
@@ -47,7 +40,7 @@ function post (state = {}, action) {
 			return {
 				...state,
 				posts
-			}
+			};
 		case ADD_POST :
 		let addPostVal = {
 					id,
@@ -61,7 +54,19 @@ function post (state = {}, action) {
 				}
 			ReadableAPI.addPost(addPostVal);
 			state.posts.push(addPostVal);
-			return state
+			return state;
+		case DELETE_POST :
+			const newState = {
+				...state,
+				posts: state.posts.map((p) => {
+						if (p.id === id) {
+							p.deleted = true;
+						}
+						return p
+					})
+			}
+			ReadableAPI.deletePost(id);
+			return newState;
 		case EDIT_POST :
 			return {
 				timestamp,

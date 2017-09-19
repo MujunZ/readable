@@ -60,6 +60,9 @@ fetch(`${api}/comments/${cmtId}`, { method: 'DELETE', headers })
   .then(res => res.json())
   .then(data => data.comments)
 
+export const deletePost = (postId) =>
+fetch(`${api}/posts/${postId}`, { method: 'DELETE', headers })
+
 export const voteComment = (cmtId, option) =>
 fetch(`${api}/comments/${cmtId}`, {
   method: 'POST',
