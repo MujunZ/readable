@@ -12,16 +12,20 @@ class PostList extends Component {
 			{posts
 	          .filter(({ category, deleted }) => category === categoryName && deleted === false )
 	          .sort((a, b) => b.voteScore - a.voteScore )
-	          .map(({ id, timestamp, title, body, author, category, voteScore}) => (
-	          	<div key={id}>
-	              <div className="card__head">
-	                <div>{voteScore} Liked</div>
-	                <Link to={`/post/${id}`}>{title}</Link>
-	                <div>{author}</div>
-	                <div>{timestamp}</div>
-	              </div>
-	          	</div>
-	            ))}
+	          .map(({ id, timestamp, title, body, author, category, voteScore}) => {
+	          	let time = new Date(timestamp);
+	          	time = time.toUTCString();
+	          	return(
+		          	<div key={id}>
+		              <div className="card__head">
+		                <div>{voteScore} Liked</div>
+		                <Link to={`/post/${id}`}>{title}</Link>
+		                <div>{author}</div>
+		                <div>{time}</div>
+		              </div>
+		          	</div>
+	            )}
+	          )}
             </div>
 		)
 	}

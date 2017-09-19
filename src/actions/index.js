@@ -24,11 +24,11 @@ export function getAllPosts (posts) {
 	}
 }
 
-export function addPost ({ id, timeStamp, title, body, author, category }) {
+export function addPost ({ id, timestamp, title, body, author, category }) {
 	return {
 		type: ADD_POST,
 		id,
-		timeStamp,
+		timestamp,
 		title,
 		body,
 		author,

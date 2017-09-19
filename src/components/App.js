@@ -47,17 +47,18 @@ class App extends Component {
 
   //openAddPostForm = () => this.setState(() => ({showAddPostForm: true}));
   //clossAddPostForm = () => this.setState(() => ({showAddPostForm: false}));
-  addPost = e => {
+  addPost = (e, category) => {
     e.preventDefault();
-    // let addPostVal = serialize(e.target, { hash: true });
-    // addPostVal = {
-    //   ...addPostVal,
-    //   timestamp: Date.now(),
-    //   id: uniqid()
-    // }
-    // this.props.addPost(addPostVal);
-    // this.setState({});
-    // e.target.reset();
+    let addPostVal = serialize(e.target, { hash: true });
+    addPostVal = {
+      ...addPostVal,
+      timestamp: Date.now(),
+      id: uniqid(),
+      category
+    }
+    this.props.addPost(addPostVal);
+    this.setState({});
+    e.target.reset();
     window.location = "../"
   }
   render() {

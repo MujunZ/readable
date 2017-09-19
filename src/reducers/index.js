@@ -40,24 +40,31 @@ function initState (state = {}, action) {
 }
 
 function post (state = {}, action) {
-	const { id, timeStamp, title, body, author, category } = action;
+	const { posts, id, timestamp, title, body, author, category } = action;
 
 	switch (action.type) {
-		case ADD_POST :
+		case GET_ALL_POSTS :
 			return {
 				...state,
-				posts: {
+				posts
+			}
+		case ADD_POST :
+		let addPostVal = {
 					id,
-					timeStamp,
+					timestamp,
 					title,
 					body,
 					author,
-					category
+					category,
+					deleted: false,
+					voteScore: 1
 				}
-			}
+			ReadableAPI.addPost(addPostVal);
+			state.posts.push(addPostVal);
+			return state
 		case EDIT_POST :
 			return {
-				timeStamp,
+				timestamp,
 				title,
 				body,
 				category

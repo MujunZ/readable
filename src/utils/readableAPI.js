@@ -35,14 +35,14 @@ export const getCmtsById = (id) =>
 	fetch(`${api}/comments/${id}`, { headers })
 	.then(res => res.json())
 
-export const addPost = (body) =>
-	fetch(`${api}//posts`, {
+export const addPost = (post) =>
+	fetch(`${api}/posts`, {
 		method: 'POST',
 	    headers: {
 	      ...headers,
 	      'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(body)
+		body: JSON.stringify(post)
 	}).then(res => res.json())
 
 export const addComment = (cmt) =>
