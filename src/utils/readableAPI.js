@@ -74,6 +74,17 @@ fetch(`${api}/comments/${cmtId}`, {
 }).then(res => res.json())
 .then(data => data.comments)
 
+export const votePost = (postId, option) =>
+fetch(`${api}/posts/${postId}`, {
+  method: 'POST',
+  headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+  body: JSON.stringify({ option })
+}).then(res => res.json())
+.then(data => data.comments)
+
 export const editComment = (cmt) =>
   fetch(`${api}/comments/${cmt.id}`, {
     method: 'PUT',

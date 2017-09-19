@@ -53,11 +53,11 @@ export function deletePost (id) {
 	}
 }
 
-export function votePost ({ id, upOrDownVote }) {
+export function votePost ({ id, voteScore }) {
 	return {
 		type: VOTE_POST,
 		id,
-		upOrDownVote
+		voteScore
 	}
 }
 

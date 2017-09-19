@@ -33,7 +33,7 @@ function initState (state = {}, action) {
 }
 
 function post (state = {}, action) {
-	const { posts, id, timestamp, title, body, author, category } = action;
+	const { posts, id, timestamp, title, body, author, category, voteScore } = action;
 
 	switch (action.type) {
 		case GET_ALL_POSTS :
@@ -67,6 +67,20 @@ function post (state = {}, action) {
 			}
 			ReadableAPI.deletePost(id);
 			return newState;
+		case VOTE_POST :
+			let option;
+			const newPosts = state.posts.map((p) => {
+						if (p.id === id) {
+							option = voteScore - p.voteScore > 0 ? "upVote" : "downVote";
+							p.voteScore = voteScore;
+						}
+						return p
+					})
+			ReadableAPI.votePost(id, option);
+			return {
+				...state,
+				comments: newPosts
+			};
 		case EDIT_POST :
 			return {
 				timestamp,
