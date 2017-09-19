@@ -1,16 +1,21 @@
 import React, { Component } from 'react';
 import PostList from './PostList';
+import PostForm from './PostForm';
 import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
 import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Post from './Post.js';
+import Modal from 'react-modal';
+import serialize from 'form-serialize';
+import uniqid from 'uniqid';
 
 class App extends Component {
   state = {
-    categories: [],
-    posts: [],
+    showAddPostForm: false,
+    addPostId: null,
+    postCategory: null
   }
   componentDidMount() {
     ReadableAPI.getAllCategories().then((categories) => {
@@ -39,6 +44,22 @@ class App extends Component {
   //           .filter(({ category, deleted }) => category === categoryName && deleted === false);
   //   return { title, author, voteScore, timestamp }
   // }
+
+  //openAddPostForm = () => this.setState(() => ({showAddPostForm: true}));
+  //clossAddPostForm = () => this.setState(() => ({showAddPostForm: false}));
+  addPost = e => {
+    e.preventDefault();
+    // let addPostVal = serialize(e.target, { hash: true });
+    // addPostVal = {
+    //   ...addPostVal,
+    //   timestamp: Date.now(),
+    //   id: uniqid()
+    // }
+    // this.props.addPost(addPostVal);
+    // this.setState({});
+    // e.target.reset();
+    window.location = "../"
+  }
   render() {
     console.log('Props', this.props);
     const { categories=[], posts=[] } = this.props.initState;
@@ -52,7 +73,10 @@ class App extends Component {
                   key={name}
                   className='category__container'
                   >
-                  <h1>{name}</h1>
+                  <div className='category__header'>
+                    <h1>{name}</h1>
+                    <Link to='/addPost' onClick={()=>this.setState({ postCategory: name })}>+</Link>
+                  </div>
                   <PostList name={name}/>
                 </section>
             ))}
@@ -65,6 +89,11 @@ class App extends Component {
             )}/>
           ))}
         </div>
+        <Route path='/addPost' render={() => (
+              <PostForm onSubmitPost={this.addPost} category={this.state.postCategory}/>
+            )
+          }
+        />
       </div>
       </BrowserRouter>
     );

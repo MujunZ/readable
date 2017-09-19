@@ -1,8 +1,11 @@
-.category__container h1 {
+.category__container .category__header {
   border: grey solid 0.1em;
   border-radius: 0.5em;
   padding: 1em;
   margin: 0.1em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .post-list {
