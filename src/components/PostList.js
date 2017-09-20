@@ -6,7 +6,6 @@ import { deletePost } from '../actions/';
 
 class PostList extends Component {
 	render() {
-		console.log('PostList Props', this.props);
 		const { posts=[] } = this.props.initState;
 		const categoryName = this.props.name;
 		return(

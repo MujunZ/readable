@@ -94,3 +94,13 @@ export const editComment = (cmt) =>
     },
     body: JSON.stringify(cmt)
  }).then(res => res.json())
+
+export const editPost = (p) =>
+  fetch(`${api}/posts/${p.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(p)
+ }).then(res => res.json())

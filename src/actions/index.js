@@ -36,10 +36,12 @@ export function addPost ({ id, timestamp, title, body, author, category }) {
 	}
 }
 
-export function editPost ({ timeStamp, title, body, category }) {
+export function editPost ({ id, author, timestamp, title, body, category }) {
 	return {
 		type: EDIT_POST,
-		timeStamp,
+		id,
+		author,
+		timestamp,
 		title,
 		body,
 		category

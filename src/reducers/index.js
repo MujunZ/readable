@@ -82,12 +82,15 @@ function post (state = {}, action) {
 				comments: newPosts
 			};
 		case EDIT_POST :
-			return {
-				timestamp,
-				title,
-				body,
-				category
+			for (let p of state.posts) {
+				if (p.id === id) {
+					p.author = author;
+					p.body = body;
+					p.title = title;
+					ReadableAPI.editPost(p);
+				}
 			}
+			return state;
 		default :
 			return state;
 	}

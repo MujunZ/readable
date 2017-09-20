@@ -7,7 +7,7 @@ class PostForm extends Component {
 		msgError: false,
 		titleError: false
 	}
-	validateAndSubmit = (e,id) => {
+	validateAndSubmit = (e,option) => {
 		e.preventDefault();
 		let { nameError, msgError, titleError } = this.state;
 
@@ -24,7 +24,7 @@ class PostForm extends Component {
 		}
 
 		if (!nameError && !msgError && !titleError){
-			this.props.onSubmitPost(e,this.props.category);
+			this.props.onSubmitPost(e,option);
 		}
 
 		this.setState({ nameError, msgError, titleError });
@@ -51,12 +51,19 @@ class PostForm extends Component {
 		}
 	}
 	render () {
+		let option = this.props.option;
+		let toLink = "";
+		if(window.location.href.indexOf("addPost") > -1) {
+			toLink = "/";
+		} else {
+			toLink = window.location;
+		}
 		return (
 			<div className="comment-form">
-				<form onSubmit={(e) => {this.validateAndSubmit(e)}}>
+				<form onSubmit={(e) => {this.validateAndSubmit(e, option)}}>
 					<div>
 						<label htmlFor="title">Title:</label>
-						<input type="text" name="title" onChange={e => this.hideTitleError(e)} defaultValue={this.props.author}/>
+						<input type="text" name="title" onChange={e => this.hideTitleError(e)} defaultValue={this.props.title}/>
 						{this.state.titleError && (<div className="error-warning">Please create a title</div>)}
 					</div>
 					<div>
@@ -70,7 +77,7 @@ class PostForm extends Component {
 						{this.state.msgError && (<div className="error-warning">Please say something.</div>)}
 					</div>
 					<button>Submit</button>
-					<Link to="/">Cancel</Link>
+					<Link to={toLink} onClick={this.props.onCancel}>Cancel</Link>
 				</form>
 			</div>
 		)
