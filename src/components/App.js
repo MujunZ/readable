@@ -91,7 +91,7 @@ class App extends Component {
           ))}
         </div>
         <Route path='/addPost' render={() => (
-              <PostForm onSubmitPost={this.addPost} category={this.state.postCategory}/>
+              <PostForm onSubmitPost={this.addPost} option={this.state.postCategory}/>
             )
           }
         />
@@ -112,8 +112,7 @@ function mapDispatchToProps (dispatch) {
   return {
     initCategories: (data) => dispatch(initCategories(data)),
     getAllPosts: (data) => dispatch(getAllPosts(data)),
-    addPost: (data) => dispatch(addPost(data)),
-    editPost: (data) => dispatch(editPost(data))
+    addPost: (data) => dispatch(addPost(data))
   }
 }
 
