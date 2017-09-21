@@ -7,7 +7,6 @@ import TiDelete from 'react-icons/lib/ti/delete';
 import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
 import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
 import TiEdit from 'react-icons/lib/ti/edit';
-import * as ReadableAPI from '../utils/readableAPI';
 import CommentForm from './CommentForm'
 
 class Comment extends Component {

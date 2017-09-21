@@ -97,7 +97,7 @@ function post (state = {}, action) {
 }
 
 function comment (state = {}, action) {
-	const { comments, author, body, deleted, id, parentId, timestamp, voteScore } = action;
+	const { comments, author, body, id, parentId, timestamp, voteScore } = action;
 
 	switch (action.type) {
 		case GET_CMTS_OF_POST :

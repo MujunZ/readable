@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as ReadableAPI from '../utils/readableAPI';
 
 class Comment extends Component {
 	state = {

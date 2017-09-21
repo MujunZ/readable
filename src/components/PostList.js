@@ -6,6 +6,7 @@ import { deletePost } from '../actions/';
 
 class PostList extends Component {
 	render() {
+		console.log('Post Props', this.props);
 		const { posts=[] } = this.props.initState;
 		const categoryName = this.props.name;
 		return(
@@ -13,7 +14,7 @@ class PostList extends Component {
 			{posts
 	          .filter(({ category, deleted }) => category === categoryName && deleted === false )
 	          .sort((a, b) => b.voteScore - a.voteScore )
-	          .map(({ id, timestamp, title, body, author, category, voteScore}) => {
+	          .map(({ id, cmtNum, timestamp, title, body, author, category, voteScore}) => {
 	          	let time = new Date(timestamp);
 	          	time = time.toUTCString();
 	          	return(
@@ -23,6 +24,7 @@ class PostList extends Component {
 		                <Link to={`/post/${id}`}>{title}</Link>
 		                <div>{author}</div>
 		                <div>{time}</div>
+		                <div>{cmtNum} Comments</div>
 		                <div onClick={()=>{this.props.deletePost(id)}}><TiDelete /></div>
 		              </div>
 		          	</div>

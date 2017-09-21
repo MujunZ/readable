@@ -21,11 +21,16 @@ class App extends Component {
     ReadableAPI.getAllCategories().then((categories) => {
       this.props.initCategories(categories);
     })
-    // ReadableAPI.getPostsOfCategory('react').then((post) => {
-    //   console.log('getPostsOfCategory',post);
-    // })
     ReadableAPI.getAllPosts().then((posts) => {
-      this.props.getAllPosts(posts)
+      let getCmtNumOfPosts = [];
+      for(let p of posts){
+          const getCmtNumOfPost = ReadableAPI.getCmtsOfPost(p.id).then((cmt) => {
+              p.cmtNum = cmt.length;
+              return p;
+          })
+          getCmtNumOfPosts.push(getCmtNumOfPost);
+      }
+      Promise.all(getCmtNumOfPosts).then((posts)=>{this.props.getAllPosts(posts)});
     })
     // ReadableAPI.getPostById('8xf0y6ziyjabvozdd253nd').then((post) => {
     //   console.log('getPostById',post);
@@ -62,7 +67,6 @@ class App extends Component {
     window.location = "../"
   }
   render() {
-    console.log('Props', this.props);
     const { categories=[], posts=[] } = this.props.initState;
     return (
       <BrowserRouter>
