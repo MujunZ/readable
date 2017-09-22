@@ -54,6 +54,7 @@ class App extends Component {
       <div>
         <Route exact path='/' render={() => (
           <main className='container'>
+            <h1>Readable</h1>
             {categories.map(({ name }) => (
                 <section
                   key={name}
