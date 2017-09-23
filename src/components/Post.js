@@ -39,7 +39,6 @@ class Post extends Component {
 		this.props.votePost({id, voteScore})
 	}
 	render() {
-		console.log('Post Props', this.props);
 		const { author, timestamp, body, title, voteScore, category } = this.props.initState.posts.filter((post) => post.id === this.props.id)[0];
 		const postId = this.props.id;
 		let time = new Date(timestamp);
