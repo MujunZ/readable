@@ -7,7 +7,6 @@ import { connect } from 'react-redux';
 import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Post from './Post.js';
-import Modal from 'react-modal';
 import serialize from 'form-serialize';
 import uniqid from 'uniqid';
 import TiPlus from 'react-icons/lib/ti/plus';

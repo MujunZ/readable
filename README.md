@@ -8,6 +8,7 @@ git clone
 ```
 - Set The Server
 ```
+$ git clone https://github.com/MujunZ/reactnd-project-readable-starter.git
 $ cd reactnd-project-readable-starter
 $ npm install
 $ node server
