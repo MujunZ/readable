@@ -88,7 +88,7 @@ class Comment extends Component {
 										}}><TiEdit /></div>
 									</div>
 								</div>
-								<div>{body}</div>
+								<div className="card__body">{body}</div>
 								{ this.state.showForm[id] && (<CommentForm onSubmitComment={(e,id) => this.editComment(e,id)} id={id} author={author} body={body}/>)}
 							</div>
 						)

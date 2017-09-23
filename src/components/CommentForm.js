@@ -37,17 +37,19 @@ class Comment extends Component {
 		return(
 			<div className="comment-form">
 				<form onSubmit={(e) => {this.validateAndSubmit(e)}}>
-					<div>
-						<label htmlFor="author">Nickname:</label>
-						<input type="text" name="author" onChange={e => this.hideNameError(e)} defaultValue={this.props.author}/>
+					<div className="comment-form__author">
+						<label htmlFor="author" className="comment-form__author-label">Nickname:</label>
+						<input type="text" name="author" onChange={e => this.hideNameError(e)} defaultValue={this.props.author} className="comment-form__author-input"/>
 						{this.state.nameError && (<div className="error-warning">Please name yourself.</div>)}
 					</div>
-					<div>
-						<label htmlFor="author">Comment:</label>
-						<input type="text" name="body" onChange={e => this.hideMsgError(e)} defaultValue={this.props.body}/>
+					<div className="comment-form__body">
+						<label htmlFor="body" className="comment-form__body-label">Comment:</label>
+						<textarea type="text" name="body" onChange={e => this.hideMsgError(e)} defaultValue={this.props.body} className="comment-form__body-input"/>
 						{this.state.msgError && (<div className="error-warning">Please say something.</div>)}
 					</div>
-					<button>submit</button>
+					<div className="comment-form__btn-container">
+						<button>submit</button>
+					</div>
 				</form>
 			</div>
 		)

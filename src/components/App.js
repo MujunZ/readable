@@ -10,6 +10,7 @@ import Post from './Post.js';
 import Modal from 'react-modal';
 import serialize from 'form-serialize';
 import uniqid from 'uniqid';
+import TiPlus from 'react-icons/lib/ti/plus';
 
 class App extends Component {
   state = {
@@ -62,7 +63,7 @@ class App extends Component {
                   >
                   <div className='category__header'>
                     <h1>{name}</h1>
-                    <Link to='/addPost' onClick={()=>this.setState({ postCategory: name })}>+</Link>
+                    <Link to='/addPost' onClick={()=>this.setState({ postCategory: name })}><TiPlus /></Link>
                   </div>
                   <PostList name={name}/>
                 </section>

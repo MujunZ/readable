@@ -1,23 +1,22 @@
 .category__container .category__header {
   border: grey solid 0.1em;
   border-radius: 0.5em;
-  padding: 1em;
+  padding: 0 1em;
   margin: 0.1em;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  text-transform: uppercase;
 }
 
 .post-list {
-	border: grey solid;
-	border-width: thin;
-	margin: -0.3em 0.7em 0 0.7em;
+	margin: 0em 0.7em 0 0.7em;
+	background-color: ghostwhite;
 }
 
 .card__head {
 	display: flex;
 	justify-content: space-between;
-	padding: 0 2em;
 }
 
 .add-content {
@@ -27,4 +26,82 @@
 
 .vote-container {
 	display: flex;
+}
+
+.vote-score {
+    width: 4.5em;
+}
+
+.title {
+    width: 50%;
+}
+
+.author {
+    width: 10%;
+}
+
+.time {
+    font-size: 0.8em;
+    width: 15%;
+}
+
+.cmt-num {
+    font-size: 0.8em;
+}
+
+.delete {
+    width: 1em;
+}
+
+.error-warning {
+	color: red;
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+.post-form__title {
+    font-size: 1.5em;
+}
+
+.post-form__title-input {
+    font-size: 1em;
+    width: 90%;
+}
+
+.post-form div {
+    margin: 0.5em 0;
+}
+
+.post-form__body textarea {
+	width: 100%;
+	height: 10em;
+}
+
+.post-form__btn-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.comment-form form div {
+    margin: 0.5em 0;
+    display: flex;
+}
+
+.comment-form__btn-container {
+    justify-content: flex-end;
+}
+
+.comment-form__body-input {
+    width: 100%;
+}
+
+.card__head > div {
+	display: flex;
+	align-items: center;
+	background-color: ghostwhite;
+}
+
+a {
+	text-decoration: none;
+	color: purple;
 }

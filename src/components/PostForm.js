@@ -59,25 +59,27 @@ class PostForm extends Component {
 			toLink = window.location;
 		}
 		return (
-			<div className="comment-form">
+			<div className="post-form">
 				<form onSubmit={(e) => {this.validateAndSubmit(e, option)}}>
-					<div>
-						<label htmlFor="title">Title:</label>
-						<input type="text" name="title" onChange={e => this.hideTitleError(e)} defaultValue={this.props.title}/>
+					<div className="post-form__title">
+						<label htmlFor="title" className="post-form__title-label">Title:</label>
+						<input type="text" name="title" onChange={e => this.hideTitleError(e)} defaultValue={this.props.title} className="post-form__title-input"/>
 						{this.state.titleError && (<div className="error-warning">Please create a title</div>)}
 					</div>
-					<div>
-						<label htmlFor="author">Nickname:</label>
-						<input type="text" name="author" onChange={e => this.hideNameError(e)} defaultValue={this.props.author}/>
+					<div className="post-form__author">
+						<label htmlFor="author" className="post-form__author-label">Nickname:</label>
+						<input type="text" name="author" onChange={e => this.hideNameError(e)} defaultValue={this.props.author} className="post-form__author-input"/>
 						{this.state.nameError && (<div className="error-warning">Please name yourself.</div>)}
 					</div>
-					<div>
-						<label htmlFor="body">Post:</label>
-						<input type="text" name="body" onChange={e => this.hideMsgError(e)} defaultValue={this.props.body}/>
+					<div className="post-form__body">
+						<label htmlFor="body" className="post-form__body-label">Post:</label>
+						<textarea type="text" name="body" onChange={e => this.hideMsgError(e)} defaultValue={this.props.body} className="post-form__body-input"/>
 						{this.state.msgError && (<div className="error-warning">Please say something.</div>)}
 					</div>
-					<button>Submit</button>
-					<Link to={toLink} onClick={this.props.onCancel}>Cancel</Link>
+					<div className="post-form__btn-container">
+						<button>Submit</button>
+						<Link to={toLink} onClick={this.props.onCancel}>Cancel</Link>
+					</div>
 				</form>
 			</div>
 		)

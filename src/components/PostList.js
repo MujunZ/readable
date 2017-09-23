@@ -38,7 +38,7 @@ class PostList extends Component {
 		const categoryName = this.props.name;
 		return(
 			<div className={`post-list posts-${categoryName}`}>
-			<div>
+			<div className="sort-posts">
 				Sort by
 				<select onChange={ e => this.selectSort(e)}>
 				  <option value="byVote">Hightest Score</option>
@@ -54,12 +54,14 @@ class PostList extends Component {
 	          	return(
 		          	<div key={id}>
 		              <div className="card__head">
-		                <div>{voteScore} Liked</div>
-		                <Link to={`/post/${id}`}>{title}</Link>
-		                <div>{author}</div>
-		                <div>{time}</div>
-		                <div>{cmtNum} Comments</div>
-		                <div onClick={()=>{this.props.deletePost(id)}}><TiDelete /></div>
+		                <div className="vote-score">{voteScore} Liked</div>
+		                <div className="title">
+		                	<Link to={`/post/${id}`}>{title}</Link>
+		                </div>
+		                <div className="author">{author}</div>
+		                <div className="time">{time}</div>
+		                <div className="cmt-num">{cmtNum} Comments</div>
+		                <div onClick={()=>{this.props.deletePost(id)}} className="delete"><TiDelete /></div>
 		              </div>
 		          	</div>
 	            )}
