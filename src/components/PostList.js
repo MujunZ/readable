@@ -49,7 +49,7 @@ class PostList extends Component {
 			{posts
 	          .filter(({ category, deleted }) => category === categoryName && deleted === false )
 	          .sort((a,b) => this.sortPosts(a,b))
-	          .map(({ id, cmtNum, timestamp, title, body, author, category, voteScore}) => {
+	          .map(({ id, cmt, timestamp, title, body, author, category, voteScore}) => {
 	          	let time = new Date(timestamp);
 	          	time = time.toUTCString();
 	          	return(
@@ -61,7 +61,7 @@ class PostList extends Component {
 		                </div>
 		                <div className="author">{author}</div>
 		                <div className="time">{time}</div>
-		                <div className="cmt-num">{cmtNum} Comments</div>
+		                <div className="cmt-num">{cmt.length} Comments</div>
 		                <div onClick={()=>{this.props.deletePost(id)}} className="delete"><TiDelete /></div>
 		              </div>
 		          	</div>
