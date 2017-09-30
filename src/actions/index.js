@@ -30,6 +30,27 @@ export function fetchAllCategories () {
 	return function(dispatch) {
 		return ReadableAPI
 			.getAllCategories()
+			.then(categories => {
+				let getPostsOfCategories = [];
+				for(let category of categories){
+					const getPostsOfCategory = ReadableAPI.getPostsOfCategory(category.name).then((posts) => {
+						let getCmtOfPosts = [];
+						for(let p of posts){
+							const getCmtOfPost = ReadableAPI.getCmtsOfPost(p.id).then((cmt) => {
+								p.cmt = cmt;
+								return p;
+							})
+							getCmtOfPosts.push(getCmtOfPost);
+						}
+						Promise.all(getCmtOfPosts).then((posts)=>{
+							category.posts = posts;
+							return category;
+						});
+					})
+					getPostsOfCategories.push(getPostsOfCategory);
+				}
+				Promise.all(getPostsOfCategories).then((category) => dispatch(initCategories(categories)));
+			})
 			.then(categories => dispatch(initCategories(categories)))
 			.catch(err => {console.log(`fetch err: ${err.message}`)})
 	} 
