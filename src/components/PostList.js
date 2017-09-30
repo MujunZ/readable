@@ -16,6 +16,7 @@ class PostList extends Component {
 				break;
 			case "byTime":
 				this.setState({ sort: "byTime" })
+				break;
 			default:
 				break;
 		}
