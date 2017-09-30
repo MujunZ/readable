@@ -4,7 +4,7 @@ import PostForm from './PostForm';
 import '../App.css';
 import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
-import { initCategories, addPost, editPost, getAllPosts } from '../actions/';
+import { fetchAllCategories, initCategories, addPost, editPost, getAllPosts } from '../actions/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Post from './Post.js';
 import serialize from 'form-serialize';
@@ -18,9 +18,9 @@ class App extends Component {
     postCategory: null
   }
   componentDidMount() {
-    ReadableAPI.getAllCategories().then((categories) => {
-      this.props.initCategories(categories);
-    })
+    // ReadableAPI.getAllCategories().then((categories) => {
+      this.props.fetchAllCategories();
+    //})
     ReadableAPI.getAllPosts().then((posts) => {
       let getCmtNumOfPosts = [];
       for(let p of posts){
@@ -96,7 +96,7 @@ function mapStateToProps ({ initState, post }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    initCategories: (data) => dispatch(initCategories(data)),
+    fetchAllCategories: () => dispatch(fetchAllCategories()),
     getAllPosts: (data) => dispatch(getAllPosts(data)),
     addPost: (data) => dispatch(addPost(data))
   }

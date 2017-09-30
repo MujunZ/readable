@@ -1,3 +1,5 @@
+import * as ReadableAPI from '../utils/readableAPI';
+
 export const INIT_CATEGORIES = "INIT_CATEGORIES";
 export const GET_ALL_POSTS = "GET_ALL_POSTS";
 export const ADD_POST = "ADD_POST";
@@ -22,6 +24,14 @@ export function getAllPosts (posts) {
 		type: GET_ALL_POSTS,
 		posts
 	}
+}
+
+export function fetchAllCategories () {
+	return function(dispatch) {
+		return ReadableAPI
+			.getAllCategories()
+			.then(categories => dispatch(initCategories(categories)))
+	} 
 }
 
 export function addPost ({ id, timestamp, title, body, author, category }) {
