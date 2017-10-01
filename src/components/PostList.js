@@ -26,16 +26,14 @@ class PostList extends Component {
 		switch (this.state.sort) {
 			case "byVote":
 				return b.voteScore - a.voteScore;
-				break;
 			case "byTime":
 				return b.timestamp - a.timestamp;
 			default:
 				return b.voteScore - a.voteScore;
-				break;
 		}
 	}
 	render() {
-		const { posts=[] } = this.props.initState;
+		const { posts=[] } = this.props.post;
 		const categoryName = this.props.name;
 		return(
 			<div className={`post-list posts-${categoryName}`}>
@@ -72,9 +70,9 @@ class PostList extends Component {
 	}
 }
 
-function mapStateToProps ({ initState, post }) {
+function mapStateToProps ({ category, post }) {
   return {
-    initState,
+    category,
     post
   }
 }

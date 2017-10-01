@@ -15,14 +15,16 @@ export const GET_CMTS_OF_POST = "GET_CMTS_OF_POST";
 export function initCategories (categories) {
 	return {
 		type: INIT_CATEGORIES,
-		categories
+		categories,
+		retrieving: false
 	}
 }
 
 export function getAllPosts (posts) {
 	return {
 		type: GET_ALL_POSTS,
-		posts
+		posts,
+		retrieving: false
 	}
 }
 
@@ -51,7 +53,6 @@ export function fetchAllCategories () {
 				}
 				Promise.all(getPostsOfCategories).then((category) => dispatch(initCategories(categories)));
 			})
-			.then(categories => dispatch(initCategories(categories)))
 			.catch(err => {console.log(`fetch err: ${err.message}`)})
 	} 
 }

@@ -36,7 +36,8 @@ class App extends Component {
     window.location = `../post/${addPostVal.id}`
   }
   render() {
-    const { categories=[], posts=[] } = this.props.initState;
+    const { categories=[] } = this.props.category;
+    const { posts=[] } = this.props.post;
     return (
       <BrowserRouter>
       <div>
@@ -75,9 +76,9 @@ class App extends Component {
   }
 }
 
-function mapStateToProps ({ initState, post }) {
+function mapStateToProps ({ category, post }) {
   return {
-    initState,
+    category,
     post
   }
 }

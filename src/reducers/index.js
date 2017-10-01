@@ -14,18 +14,13 @@ import {
 import { combineReducers } from 'redux';
 import * as ReadableAPI from '../utils/readableAPI';
 
-function initState (state = {}, action) {
-	const { categories, posts } = action
+function category (state = {}, action) {
+	const { categories } = action
 	switch (action.type) {
 		case INIT_CATEGORIES :
 			return {
 				...state,
 				categories
-			}
-		case GET_ALL_POSTS :
-			return {
-				...state,
-				posts
 			}
 		default :
 			return state;
@@ -160,7 +155,7 @@ function comment (state = {}, action) {
 }
 
 export default combineReducers({
-	initState,
+	category,
 	post,
 	comment
 })
