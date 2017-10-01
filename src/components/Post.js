@@ -39,7 +39,7 @@ class Post extends Component {
 		this.props.votePost({id, voteScore})
 	}
 	render() {
-		const { author, timestamp, body, title, voteScore, category } = this.props.initState.posts.filter((post) => post.id === this.props.id)[0];
+		const { author, timestamp, body, title, voteScore, category } = this.props.post.posts.filter((post) => post.id === this.props.id)[0];
 		const postId = this.props.id;
 		let time = new Date(timestamp);
 		time = time.toUTCString();
@@ -71,9 +71,9 @@ class Post extends Component {
 	}
 }
 
-function mapStateToProps ({ initState, post, comment }) {
+function mapStateToProps ({ category, post, comment }) {
   return {
-    initState,
+    category,
     post,
     comment
   }
