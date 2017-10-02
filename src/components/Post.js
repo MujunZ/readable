@@ -45,7 +45,6 @@ class Post extends Component {
 		time = time.toUTCString();
 		return(
 			<main className={`post-${postId}`}>
-				<Link to="/">back</Link>
 				{!this.state.showForm && (<section>
 					<h1>{title}</h1>
 					<div className="post-info card__head">

@@ -55,7 +55,7 @@ class PostList extends Component {
 		              <div className="card__head">
 		                <div className="vote-score">{voteScore} Liked</div>
 		                <div className="title">
-		                	<Link to={`/post/${id}`}>{title}</Link>
+		                	<Link to={`/${category}/post/${id}`}>{title}</Link>
 		                </div>
 		                <div className="author">{author}</div>
 		                <div className="time">{time}</div>

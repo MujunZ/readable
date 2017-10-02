@@ -35,32 +35,46 @@ class App extends Component {
     e.target.reset();
     window.location = `../post/${addPostVal.id}`
   }
+  breadcrumbs = (match) => {
+    const { category, post } = match.params;
+    return (
+      <div >
+        <Link to="/">Home</Link>
+        <Link to={`/${category}`}>>{category}</Link>
+        <Link to={`/${category}/${post}`}>{post && (`>${post}`)}</Link>
+      </div>
+    )
+  }
+  CategoryList = (name) => (
+      <section
+        key={name}
+        className='category__container'
+        >
+        <div className='category__header'>
+        <Link to={`/${name}`}>
+            <h1>{name}</h1>
+        </Link>
+          <Link to='/addPost' onClick={()=>this.setState({ postCategory: name })}><TiPlus /></Link>
+        </div>
+        <PostList name={name}/>
+      </section>
+  )
   render() {
     const { categories=[] } = this.props.category;
     const { posts=[] } = this.props.post;
     return (
       <BrowserRouter>
       <div>
+        <Route path="/:category/:post?" render={({ match }) => this.breadcrumbs(match)}/>
         <Route exact path='/' render={() => (
           <main className='container'>
             <h1>Readable</h1>
-            {categories.map(({ name }) => (
-                <section
-                  key={name}
-                  className='category__container'
-                  >
-                  <div className='category__header'>
-                    <h1>{name}</h1>
-                    <Link to='/addPost' onClick={()=>this.setState({ postCategory: name })}><TiPlus /></Link>
-                  </div>
-                  <PostList name={name}/>
-                </section>
-            ))}
+            {categories.map(({ name }) => this.CategoryList(name))}
           </main>
         )}/>
         <div>
-          {posts.map(({ id }) => (
-            <Route key={id} path={`/post/${id}`} render={()=>(
+          {posts.map(({ id, category }) => (
+            <Route key={id} path={`/${category}/post/${id}`} render={()=>(
               <Post id={id} />
             )}/>
           ))}
@@ -70,6 +84,10 @@ class App extends Component {
             )
           }
         />
+        <Route exact path="/:category" render={({ match }) => {
+            const name = match.params.category;
+            return this.CategoryList(name);
+        }}/> 
       </div>
       </BrowserRouter>
     );
