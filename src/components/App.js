@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PostList from './PostList';
 import PostForm from './PostForm';
 import '../App.css';
-import * as ReadableAPI from '../utils/readableAPI';
 import { connect } from 'react-redux';
 import { fetchAllCategories, fetchAllPosts, addPost, editPost } from '../actions/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';

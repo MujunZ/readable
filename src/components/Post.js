@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { votePost, editPost, getCmtsOfPost } from '../actions/';
-import { Link } from 'react-router-dom';
 import * as ReadableAPI from '../utils/readableAPI';
 import Comment from './Comment.js';
 import PostForm from './PostForm';
