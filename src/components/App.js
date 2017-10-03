@@ -3,7 +3,7 @@ import PostList from './PostList';
 import PostForm from './PostForm';
 import '../App.css';
 import { connect } from 'react-redux';
-import { fetchAllCategories, fetchAllPosts, addPost, editPost } from '../actions/';
+import { fetchAllCategories, fetchAllPosts, addPost } from '../actions/';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import Post from './Post.js';
 import serialize from 'form-serialize';
@@ -73,8 +73,8 @@ class App extends Component {
         )}/>
         <div>
           {posts.map(({ id, category }) => (
-            <Route key={id} path={`/${category}/post/${id}`} render={()=>(
-              <Post id={id} />
+            <Route key={id} path={`/${category}/post/${id}`} render={({ match })=>(
+              <Post id={id} match={match}/>
             )}/>
           ))}
         </div>
