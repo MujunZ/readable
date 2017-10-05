@@ -59,6 +59,7 @@ class Comment extends Component {
 					<h1>Comments</h1>
 				</div>
 				<CommentForm onSubmitComment={this.addComment}/>
+				<div>{comments.length} comments</div>
 				<hr/>
 				<div className="comment-list">
 				{comments
