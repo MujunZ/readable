@@ -32,7 +32,7 @@ class App extends Component {
     this.props.addPost(addPostVal);
     this.setState({});
     e.target.reset();
-    window.location = `../post/${addPostVal.id}`
+    window.location = `../${category}/post/${addPostVal.id}`
   }
   breadcrumbs = (match) => {
     const { category, post } = match.params;
@@ -53,7 +53,7 @@ class App extends Component {
         <Link to={`/${name}`}>
             <h1>{name}</h1>
         </Link>
-          <Link to='/addPost' onClick={()=>this.setState({ postCategory: name })}><TiPlus /></Link>
+          <Link to='/addPost/' onClick={()=>this.setState({ postCategory: name })}><TiPlus /></Link>
         </div>
         <PostList name={name}/>
       </section>
@@ -83,7 +83,7 @@ class App extends Component {
             )
           }
         />
-        <Route exact path="/:category" render={({ match }) => {
+        <Route exact strict path="/:category" render={({ match }) => {
             const name = match.params.category;
             return this.CategoryList(name);
         }}/> 

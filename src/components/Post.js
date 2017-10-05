@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { votePost, editPost, getCmtsOfPost } from '../actions/';
+import { votePost, editPost, getCmtsOfPost, deletePost } from '../actions/';
 import * as ReadableAPI from '../utils/readableAPI';
 import Comment from './Comment.js';
 import PostForm from './PostForm';
 import TiThumbsUp from 'react-icons/lib/ti/thumbs-up';
 import TiThumbsDown from 'react-icons/lib/ti/thumbs-down';
 import TiEdit from 'react-icons/lib/ti/edit';
+import TiDelete from 'react-icons/lib/ti/delete';
 import serialize from 'form-serialize';
+import { Link } from 'react-router-dom';
 
 class Post extends Component {
 	state = {
@@ -60,6 +62,7 @@ class Post extends Component {
 						<div onClick={() => {
 							this.setState({ showForm: true });
 						}}><TiEdit/></div>
+						<Link to={`/${category}`} onClick={()=>{this.props.deletePost(postId)}} className="delete"><TiDelete /></Link>
 					</div>
 					<div className="post-body card__body">{body}</div>
 				</section>)}
@@ -82,7 +85,8 @@ function mapDispatchToProps (dispatch) {
   return {
     votePost: (data) => dispatch(votePost(data)),
     editPost: (data) => dispatch(editPost(data)),
-    getCmtsOfPost: (data) => dispatch(getCmtsOfPost(data))
+    getCmtsOfPost: (data) => dispatch(getCmtsOfPost(data)),
+    deletePost: (data) => dispatch(deletePost(data))
   }
 }
 
