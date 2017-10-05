@@ -42,9 +42,10 @@ class Post extends Component {
 		const postId = this.props.id;
 		let time = new Date(timestamp);
 		time = time.toUTCString();
+		let showForm = window.location.hash === "#edit" || this.state.showForm;
 		return(
 			<main className={`post-${postId}`}>
-				{!this.state.showForm && (<section>
+				{!showForm && (<section>
 					<h1>{title}</h1>
 					<div className="post-info card__head">
 						<div className="vote-container">
@@ -62,7 +63,7 @@ class Post extends Component {
 					</div>
 					<div className="post-body card__body">{body}</div>
 				</section>)}
-				{this.state.showForm && (<PostForm option={postId} author={author} body={body} title={title} category={category} onCancel={() => {this.setState({ showForm: false })}} onSubmitPost={(e,postId) => {this.editPost(e, postId)}}/>)}
+				{showForm && (<PostForm option={postId} author={author} body={body} title={title} category={category} onCancel={() => {this.setState({ showForm: false })}} onSubmitPost={(e,postId) => {this.editPost(e, postId)}}/>)}
 				<Comment parentId={postId}/>
 			</main>
 		)

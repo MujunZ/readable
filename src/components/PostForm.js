@@ -26,6 +26,10 @@ class PostForm extends Component {
 		if (!nameError && !msgError && !titleError){
 			this.props.onSubmitPost(e,option);
 		}
+		
+		if(window.location.hash === "#edit") {
+			window.location = window.location.pathname;
+		}
 
 		this.setState({ nameError, msgError, titleError });
 	}
